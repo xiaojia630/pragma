@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="874" height="163" viewBox="0 0 874 163" role="img" aria-label="pragma lock show">
+<rect width="100%" height="100%" rx="10" fill="#1e1e2e"/>
+<rect width="100%" height="30" rx="10" fill="#313244"/><rect y="20" width="100%" height="10" fill="#313244"/>
+<circle cx="18" cy="15" r="5.5" fill="#f38ba8"/><circle cx="36" cy="15" r="5.5" fill="#f9e2af"/><circle cx="54" cy="15" r="5.5" fill="#a6e3a1"/>
+<text x="50%" y="19.5" fill="#a6adc8" font-size="12" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif">pragma lock show</text>
+<g font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+<text x="22" y="58" fill="#89b4fa" font-weight="600" xml:space="preserve">$ pragma lock show</text>
+<text x="22" y="77" fill="#cdd6f4" font-weight="400" xml:space="preserve">cb689b5f2615be31  Use top-level import statements, not require(). (AGENTS.md:5)</text>
+<text x="22" y="96" fill="#cdd6f4" font-weight="400" xml:space="preserve">    fix: Use a top-level import instead.</text>
+<text x="22" y="115" fill="#cdd6f4" font-weight="400" xml:space="preserve">c88859b94d9fa5a6  Never call console.log in src/; log through log() from src/log.ts. (AGENTS.md:6)</text>
+<text x="22" y="134" fill="#cdd6f4" font-weight="400" xml:space="preserve">    fix: Import { log } from &#x27;./log&#x27; and call log(...) instead of console.log(...).</text>
+</g></svg>

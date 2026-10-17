@@ -9,6 +9,8 @@ markdown: AGENTS.md, CLAUDE.md, CONTRIBUTING, ADRs, design docs.
 - It also checks the code you already have: docs that point at code that's gone, code that
   already breaks the rules, and what recent commits added.
 
+![pragma stopping an edit that breaks AGENTS.md](docs/pragma/images/blocked-edit.svg)
+
 pragma is one binary. It runs locally, and reads your docs through your own Claude Code account.
 
 ## Install

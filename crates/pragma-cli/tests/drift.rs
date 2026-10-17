@@ -118,7 +118,7 @@ fn drift_sets_apart_paths_that_may_be_urls_and_finds_names_without_their_extensi
     let human = common::stdout(&repo.run(&["drift"]));
     let groups: Vec<&str> = human.split("\n\n").collect();
     assert!(
-        groups[1].starts_with("1 references point at things this repo does not have:"),
+        groups[1].starts_with("1 reference points at something this repo does not have:"),
         "{human}"
     );
     assert!(

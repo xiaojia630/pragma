@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="691" height="543" viewBox="0 0 691 543" role="img" aria-label="The code you already have">
+<rect width="100%" height="100%" rx="10" fill="#1e1e2e"/>
+<rect width="100%" height="30" rx="10" fill="#313244"/><rect y="20" width="100%" height="10" fill="#313244"/>
+<circle cx="18" cy="15" r="5.5" fill="#f38ba8"/><circle cx="36" cy="15" r="5.5" fill="#f9e2af"/><circle cx="54" cy="15" r="5.5" fill="#a6e3a1"/>
+<text x="50%" y="19.5" fill="#a6adc8" font-size="12" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif">The code you already have</text>
+<g font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+<text x="22" y="58" fill="#89b4fa" font-weight="600" xml:space="preserve">$ pragma drift</text>
+<text x="22" y="77" fill="#cdd6f4" font-weight="400" xml:space="preserve">Checked 1 doc and 3 references.</text>
+<text x="22" y="96" fill="#cdd6f4" font-weight="400" xml:space="preserve"></text>
+<text x="22" y="115" fill="#cdd6f4" font-weight="400" xml:space="preserve">1 reference points at something this repo does not have:</text>
+<text x="22" y="134" fill="#cdd6f4" font-weight="400" xml:space="preserve">  AGENTS.md</text>
+<text x="22" y="153" fill="#cdd6f4" font-weight="400" xml:space="preserve">        7  39ce669cc5f4a7b2  scripts/seed.sh  missing</text>
+<text x="22" y="172" fill="#cdd6f4" font-weight="400" xml:space="preserve">Mark one as intended with: pragma exception add &lt;id&gt; --reason intended</text>
+<text x="22" y="191" fill="#cdd6f4" font-weight="400" xml:space="preserve"></text>
+<text x="22" y="210" fill="#89b4fa" font-weight="600" xml:space="preserve">$ pragma audit</text>
+<text x="22" y="229" fill="#cdd6f4" font-weight="400" xml:space="preserve">Checked 3 files against 2 rules.</text>
+<text x="22" y="248" fill="#cdd6f4" font-weight="400" xml:space="preserve"></text>
+<text x="22" y="267" fill="#cdd6f4" font-weight="400" xml:space="preserve">1 x Use top-level import statements, not require(). (AGENTS.md:5)</text>
+<text x="22" y="286" fill="#cdd6f4" font-weight="400" xml:space="preserve">    663feb467ac07bef  src/legacy.ts:1  require(&#x27;fs&#x27;)</text>
+<text x="22" y="305" fill="#cdd6f4" font-weight="400" xml:space="preserve"></text>
+<text x="22" y="324" fill="#cdd6f4" font-weight="400" xml:space="preserve">Mark one as not a violation with:</text>
+<text x="22" y="343" fill="#cdd6f4" font-weight="400" xml:space="preserve">  pragma exception add &lt;id&gt; --reason deliberate|check-is-wrong</text>
+<text x="22" y="362" fill="#cdd6f4" font-weight="400" xml:space="preserve"></text>
+<text x="22" y="381" fill="#89b4fa" font-weight="600" xml:space="preserve">$ pragma backtest</text>
+<text x="22" y="400" fill="#cdd6f4" font-weight="400" xml:space="preserve">Checked 1 commit against 2 rules.</text>
+<text x="22" y="419" fill="#cdd6f4" font-weight="400" xml:space="preserve">The history has only 2 commits, fewer than the 200 asked for.</text>
+<text x="22" y="438" fill="#cdd6f4" font-weight="400" xml:space="preserve">The first commit is not checked: there is nothing before it to compare with.</text>
+<text x="22" y="457" fill="#cdd6f4" font-weight="400" xml:space="preserve">pragma would have stopped 1 violation these commits introduced.</text>
+<text x="22" y="476" fill="#cdd6f4" font-weight="400" xml:space="preserve"></text>
+<text x="22" y="495" fill="#cdd6f4" font-weight="400" xml:space="preserve">1 x Use top-level import statements, not require(). (AGENTS.md:5)</text>
+<text x="22" y="514" fill="#cdd6f4" font-weight="400" xml:space="preserve">    de59e66  src/legacy.ts:1  add legacy module</text>
+</g></svg>

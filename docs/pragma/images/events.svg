@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="924" height="125" viewBox="0 0 924 125" role="img" aria-label="pragma events">
+<rect width="100%" height="100%" rx="10" fill="#1e1e2e"/>
+<rect width="100%" height="30" rx="10" fill="#313244"/><rect y="20" width="100%" height="10" fill="#313244"/>
+<circle cx="18" cy="15" r="5.5" fill="#f38ba8"/><circle cx="36" cy="15" r="5.5" fill="#f9e2af"/><circle cx="54" cy="15" r="5.5" fill="#a6e3a1"/>
+<text x="50%" y="19.5" fill="#a6adc8" font-size="12" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif">pragma events</text>
+<g font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+<text x="22" y="58" fill="#89b4fa" font-weight="600" xml:space="preserve">$ pragma events</text>
+<text x="22" y="77" fill="#f38ba8" font-weight="400" xml:space="preserve">06:48:47  blocked    src/report.ts:4  Never call console.log in src/; log through log() from src/log.ts.</text>
+<text x="22" y="96" fill="#a6e3a1" font-weight="400" xml:space="preserve">06:48:47  cleared    src/report.ts  Never call console.log in src/; log through log() from src/log.ts.</text>
+</g></svg>

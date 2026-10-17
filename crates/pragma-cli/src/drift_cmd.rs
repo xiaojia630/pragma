@@ -91,10 +91,19 @@ pub fn apply(cwd: &Path, ids: Vec<String>, json: bool) -> Result<()> {
     Ok(())
 }
 
+/// "1 doc", "2 docs".
+fn plural(count: usize, noun: &str) -> String {
+    match count {
+        1 => format!("1 {noun}"),
+        _ => format!("{count} {noun}s"),
+    }
+}
+
 fn print_human(report: &DriftReport, stale: &[Exception]) {
     println!(
-        "Checked {} docs and {} references.",
-        report.docs_checked, report.references_checked
+        "Checked {} and {}.",
+        plural(report.docs_checked, "doc"),
+        plural(report.references_checked, "reference")
     );
     // A path that may be a URL is set apart; the rest is split by how sure the check is.
     let (urls, rest): (Vec<&DriftFinding>, Vec<&DriftFinding>) = report
@@ -108,9 +117,14 @@ fn print_human(report: &DriftReport, stale: &[Exception]) {
         println!("Every reference checked out.");
     }
     if !sure.is_empty() {
+        let points = if sure.len() == 1 {
+            "points at something"
+        } else {
+            "point at things"
+        };
         println!(
-            "\n{} references point at things this repo does not have:",
-            sure.len()
+            "\n{} {points} this repo does not have:",
+            plural(sure.len(), "reference")
         );
         print_findings(&sure);
     }

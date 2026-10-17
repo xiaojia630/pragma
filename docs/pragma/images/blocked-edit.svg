@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="899" height="201" viewBox="0 0 899 201" role="img" aria-label="Claude Code tries to write console.log into src/report.ts">
+<rect width="100%" height="100%" rx="10" fill="#1e1e2e"/>
+<rect width="100%" height="30" rx="10" fill="#313244"/><rect y="20" width="100%" height="10" fill="#313244"/>
+<circle cx="18" cy="15" r="5.5" fill="#f38ba8"/><circle cx="36" cy="15" r="5.5" fill="#f9e2af"/><circle cx="54" cy="15" r="5.5" fill="#a6e3a1"/>
+<text x="50%" y="19.5" fill="#a6adc8" font-size="12" text-anchor="middle" font-family="-apple-system, Segoe UI, sans-serif">Claude Code tries to write console.log into src/report.ts</text>
+<g font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+<text x="22" y="58" fill="#7f849c" font-weight="400" xml:space="preserve"># pragma stops the edit and hands Claude this:</text>
+<text x="22" y="77" fill="#f38ba8" font-weight="600" xml:space="preserve">pragma blocked this edit.</text>
+<text x="22" y="96" fill="#f9e2af" font-weight="400" xml:space="preserve">Rule (AGENTS.md:6, &quot;Conventions&quot;): Never call console.log in src/; log through log() from src/log.ts.</text>
+<text x="22" y="115" fill="#f9e2af" font-weight="400" xml:space="preserve">Found: src/report.ts:4  console.log(&#x27;users&#x27;, users.length);</text>
+<text x="22" y="134" fill="#a6e3a1" font-weight="400" xml:space="preserve">Fix: Import { log } from &#x27;./log&#x27; and call log(...) instead of console.log(...).</text>
+<text x="22" y="153" fill="#cdd6f4" font-weight="400" xml:space="preserve">If the user explicitly asked for this change, stop and tell them pragma blocked it; they can</text>
+<text x="22" y="172" fill="#cdd6f4" font-weight="400" xml:space="preserve">pause pragma for this repo with `pragma pause`.</text>
+</g></svg>

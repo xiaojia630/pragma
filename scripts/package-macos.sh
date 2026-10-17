@@ -21,6 +21,7 @@ codesign --force -s - "$stage/pragma"
 
 # Same layout as docs/pragma/, so the README's links work, with the demo next to the binary.
 cp docs/pragma/README.md docs/pragma/commands.md docs/pragma/how-it-works.md "$stage/"
+cp -R docs/pragma/images "$stage/"
 cp docs/pragma/demo/try-demo.sh "$stage/try-demo.sh"
 chmod +x "$stage/pragma" "$stage/try-demo.sh"
 

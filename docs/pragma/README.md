@@ -93,6 +93,10 @@ The script creates `~/pragma-demo`. Pass another folder to put it elsewhere. The
 broke it and the fix, so Claude can write the file again with `log()`. `pragma events` lists what
 was stopped.
 
+![pragma stopping an edit that breaks AGENTS.md](images/blocked-edit.svg)
+
+![pragma events listing the block and the passing edit that cleared it](images/events.svg)
+
 ### Your own repo
 
 ```sh
@@ -110,6 +114,8 @@ pragma commit -m "chore: add pragma"                # commits .pragma/ and nothi
 A big doc folder costs more model calls, so check the estimate first. `pragma config set` replaces
 the exclude list, so pass every glob you want to keep.
 
+![pragma lock show listing the rules that block edits](images/lock-show.svg)
+
 ### The code you already have
 
 These need no model and no agent. `audit` and `backtest` check the rules in the lock, so run them
@@ -121,6 +127,8 @@ pragma audit       # code that already breaks the rules in the lock
 pragma backtest    # violations your last 200 commits added that the lock would have stopped
 pragma events      # what the edit check blocked, let through or left unchecked
 ```
+
+![pragma drift, audit and backtest on a small repo](images/existing-code.svg)
 
 When a finding is not a violation, record why. The `<id>` is printed next to the finding:
 
