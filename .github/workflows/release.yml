@@ -1,0 +1,65 @@
+name: release
+
+# Pushing a tag like v0.1.0 builds pragma for macOS (Apple Silicon and Intel in one binary) and
+# Linux (x86_64 and arm64) and publishes them as a GitHub release, which install.sh downloads.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            asset: pragma-macos-universal
+          - os: ubuntu-latest
+            asset: pragma-linux-x86_64
+          - os: ubuntu-24.04-arm
+            asset: pragma-linux-aarch64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup show
+      - name: Build (macOS, universal)
+        if: runner.os == 'macOS'
+        run: |
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+          cargo build --release -p pragma-cli --target aarch64-apple-darwin
+          cargo build --release -p pragma-cli --target x86_64-apple-darwin
+          mkdir -p out
+          lipo -create -output out/pragma \
+            target/aarch64-apple-darwin/release/pragma target/x86_64-apple-darwin/release/pragma
+          codesign --force -s - out/pragma
+      - name: Build (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          cargo build --release -p pragma-cli
+          mkdir -p out
+          cp target/release/pragma out/pragma
+      - run: out/pragma version
+      - run: tar -czf ${{ matrix.asset }}.tar.gz -C out pragma
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: ${{ matrix.asset }}.tar.gz
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "${{ github.ref_name }}" dist/*.tar.gz
+          --repo "${{ github.repository }}"
+          --title "pragma ${{ github.ref_name }}"
+          --generate-notes

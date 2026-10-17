@@ -17,7 +17,8 @@ pragma is a preview, version 0.1.0.
 
 - It works with Claude Code only.
 - The hook installs on macOS and Linux. It does not install on Windows yet.
-- A prebuilt binary exists for macOS, on Apple Silicon and Intel. Elsewhere, build from source.
+- Prebuilt binaries exist for macOS (Apple Silicon and Intel) and Linux (x86_64 and arm64).
+  Elsewhere, build from source.
 - Only the edit check runs inside a Claude Code session. Checks at the end of a turn, and sending
   violations back to the agent, are not built yet.
 
@@ -29,41 +30,42 @@ pragma is a preview, version 0.1.0.
 
 ## Install
 
-The binary must live at `~/.pragma/bin/pragma`. The hook that pragma adds to Claude Code runs
-`$PRAGMA_HOME/bin/pragma`, and `PRAGMA_HOME` defaults to `~/.pragma`. The hook does not look at
-your `PATH`, and it does nothing if that file is missing. The `PATH` line below is for you.
-
-### A. The preview zip (macOS)
-
-Unzip `pragma-0.1.0-macos.zip`, open a terminal in the `pragma` folder it creates, and run:
+### The installer (macOS and Linux)
 
 ```sh
-mkdir -p ~/.pragma/bin
-mv pragma ~/.pragma/bin/
-xattr -d com.apple.quarantine ~/.pragma/bin/pragma 2>/dev/null   # unsigned preview
-echo 'export PATH="$HOME/.pragma/bin:$PATH"' >> ~/.zshrc
-export PATH="$HOME/.pragma/bin:$PATH"
-pragma version
+curl -fsSL https://raw.githubusercontent.com/xiaojia630/pragma/main/install.sh | sh
 pragma hooks install
 ```
 
-### B. From source (macOS or Linux)
+The installer downloads the latest release for your machine (macOS on Apple Silicon or Intel,
+Linux on x86_64 or arm64) into `~/.pragma/bin/pragma` and adds that folder to your `PATH` in your
+shell's startup file. Open a new terminal afterwards, or run the `export` line it prints. To keep
+your startup file untouched, run it with `PRAGMA_NO_MODIFY_PATH=1`. Run the installer again to
+update.
+
+`pragma version` should then print `pragma 0.1.0 (lock format 1)`.
+
+### From source
+
+With [rustup](https://rustup.rs) and a C compiler:
 
 ```sh
 git clone https://github.com/xiaojia630/pragma.git
 cd pragma
 cargo build --release -p pragma-cli
-mkdir -p ~/.pragma/bin
-cp target/release/pragma ~/.pragma/bin/pragma
+mkdir -p ~/.pragma/bin && cp target/release/pragma ~/.pragma/bin/pragma
 export PATH="$HOME/.pragma/bin:$PATH"   # also add this line to your shell's startup file
-pragma version
 pragma hooks install
 ```
 
-The first time cargo runs, rustup installs the Rust toolchain pinned in `rust-toolchain.toml`. The
-build compiles C code for the TypeScript and JavaScript grammars, so it needs a C compiler.
+rustup installs the Rust toolchain pinned in `rust-toolchain.toml` on the first build. The build
+compiles C code for the TypeScript and JavaScript grammars, so it needs a C compiler.
 
-With either install, `pragma version` should print `pragma 0.1.0 (lock format 1)`.
+### Why `~/.pragma/bin`
+
+The hook that pragma adds to Claude Code runs `$PRAGMA_HOME/bin/pragma`, and `PRAGMA_HOME`
+defaults to `~/.pragma`. The hook does not look at your `PATH`, and does nothing if that file is
+missing, so keep the binary there.
 
 ### What `pragma hooks install` does
 
@@ -78,10 +80,10 @@ projects are untouched. `pragma hooks status` tells you whether it is installed.
 ### Watch it stop an edit
 
 The demo makes a small repo whose `AGENTS.md` states two rules, with both rules already in its
-lock. The script is `docs/pragma/demo/try-demo.sh` in this repo, and `try-demo.sh` in the zip.
+lock. The script is `docs/pragma/demo/try-demo.sh` in this repo.
 
 ```sh
-sh docs/pragma/demo/try-demo.sh     # in the zip's folder: sh try-demo.sh
+curl -fsSL https://raw.githubusercontent.com/xiaojia630/pragma/main/docs/pragma/demo/try-demo.sh | sh
 cd ~/pragma-demo
 claude "Add src/report.ts with a function that prints the number of users using console.log"
 pragma events
@@ -173,8 +175,8 @@ Claude Code's settings. Remove it by hand: delete the hook whose command starts 
 `export PATH=...` line from the install steps to your shell's startup file, then open a new
 terminal. `command -v pragma` shows where the shell finds it.
 
-**macOS refuses to open pragma.** The preview is not notarized by Apple, so Gatekeeper can block
-it. Run `xattr -d com.apple.quarantine ~/.pragma/bin/pragma`. If macOS still refuses, allow it
+**macOS refuses to open pragma.** pragma is not notarized by Apple yet. The installer avoids the
+block (curl downloads are not quarantined); if you downloaded it by hand, run `xattr -d com.apple.quarantine ~/.pragma/bin/pragma`. If macOS still refuses, allow it
 under System Settings > Privacy & Security.
 
 **Reading the docs is paused.** `pragma status` says why. It prints either

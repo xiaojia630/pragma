@@ -17,27 +17,27 @@ pragma is one binary. It runs locally, and reads your docs through your own Clau
 
 ## Install
 
-**Preview build (macOS, Apple Silicon and Intel).** Unzip `pragma-0.1.0-macos.zip`, then:
+macOS or Linux, one line:
 
 ```sh
-mkdir -p ~/.pragma/bin
-mv pragma ~/.pragma/bin/
-xattr -d com.apple.quarantine ~/.pragma/bin/pragma 2>/dev/null   # the preview is unsigned
-echo 'export PATH="$HOME/.pragma/bin:$PATH"' >> ~/.zshrc
-export PATH="$HOME/.pragma/bin:$PATH"
+curl -fsSL https://raw.githubusercontent.com/xiaojia630/pragma/main/install.sh | sh
 pragma hooks install
 ```
 
-**From source** (macOS or Linux, with [rustup](https://rustup.rs)):
+The first line puts `pragma` in `~/.pragma/bin` and adds it to your `PATH`; the second lets it
+check Claude Code's edits. It only acts in repos you turn it on in. You need git and
+[Claude Code](https://claude.com/claude-code).
+
+**See it work in two minutes**, in a throwaway demo repo:
 
 ```sh
-cargo build --release -p pragma-cli
-mkdir -p ~/.pragma/bin && cp target/release/pragma ~/.pragma/bin/
-pragma hooks install
+curl -fsSL https://raw.githubusercontent.com/xiaojia630/pragma/main/docs/pragma/demo/try-demo.sh | sh
+cd ~/pragma-demo
+claude "Add src/report.ts with a function that prints the number of users using console.log"
 ```
 
-The binary must live at `~/.pragma/bin/pragma`, because that is the path pragma's Claude Code
-hooks call. The hooks do nothing in a repo without a `.pragma/` folder.
+Claude tries to write `console.log`, which the demo's AGENTS.md rules out. pragma stops the edit
+and hands Claude the rule and the fix.
 
 ## Use it
 
