@@ -1,5 +1,7 @@
 # pragma
 
+[![ci](https://github.com/xiaojia630/pragma/actions/workflows/ci.yml/badge.svg)](https://github.com/xiaojia630/pragma/actions/workflows/ci.yml)
+
 pragma makes coding agents follow the engineering specs your repo already writes down in
 markdown: AGENTS.md, CLAUDE.md, CONTRIBUTING, ADRs, design docs.
 
