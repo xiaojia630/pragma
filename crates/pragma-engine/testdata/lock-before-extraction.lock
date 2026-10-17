@@ -1,0 +1,227 @@
+{
+  "format": 1,
+  "clauses": [
+    {
+      "id": "142120a3f24fa4ee",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Agent Guardrails"
+        ],
+        "para_hash": "edaae341def35764",
+        "lines": [
+          298,
+          298
+        ],
+        "quote": "- Never use `asProvisioned(...)!` or `asAvailableProject(...)!`; use explicit null checks."
+      },
+      "text": "Never use asAvailableProject(...)!; use explicit null checks.",
+      "scope": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "forbidden-pattern",
+        "pattern": "asAvailableProject($$$ARGS)!",
+        "examples": {
+          "bad": "const host = asAvailableProject(store)!.host;",
+          "good": "const project = asAvailableProject(store);"
+        }
+      },
+      "fix": "const project = asAvailableProject(store); if (!project) return; then use project."
+    },
+    {
+      "id": "6d32d1d5ac55fe90",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Agent Guardrails"
+        ],
+        "para_hash": "e280c551cf409b16",
+        "lines": [
+          300,
+          300
+        ],
+        "quote": "- Access task managers through `getTaskManagerStore(projectId)`, not `project.taskManager`."
+      },
+      "text": "Access task managers through getTaskManagerStore(projectId), not project.taskManager.",
+      "scope": [
+        "apps/web/src/**/*.ts",
+        "apps/web/src/**/*.tsx"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "forbidden-pattern",
+        "pattern": "$PROJECT.taskManager",
+        "examples": {
+          "bad": "const manager = project.taskManager;",
+          "good": "const manager = getTaskManagerStore(projectId);"
+        }
+      },
+      "fix": "Use getTaskManagerStore(projectId) instead."
+    },
+    {
+      "id": "b78c75d09ad28242",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Agent Guardrails"
+        ],
+        "para_hash": "edaae341def35764",
+        "lines": [
+          298,
+          298
+        ],
+        "quote": "- Never use `asProvisioned(...)!` or `asAvailableProject(...)!`; use explicit null checks."
+      },
+      "text": "Never use asProvisioned(...)!; use explicit null checks.",
+      "scope": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "forbidden-pattern",
+        "pattern": "asProvisioned($$$ARGS)!",
+        "examples": {
+          "bad": "const id = asProvisioned(task)!.id;",
+          "good": "const provisioned = asProvisioned(task);"
+        }
+      },
+      "fix": "const provisioned = asProvisioned(task); if (!provisioned) return; then use provisioned."
+    },
+    {
+      "id": "c06b04762d1a81d4",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Agent Guardrails"
+        ],
+        "para_hash": "e0383ca917704e07",
+        "lines": [
+          272,
+          272
+        ],
+        "quote": "- Do not hand-edit numbered Drizzle migrations or `drizzle/meta/`."
+      },
+      "text": "Do not hand-edit numbered Drizzle migrations or drizzle/meta/.",
+      "scope": [
+        "apps/web/drizzle/[0-9]*.sql",
+        "apps/web/drizzle/meta/**"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "protected-paths"
+      },
+      "fix": "Change the schema, then run pnpm run db:generate from apps/web/."
+    },
+    {
+      "id": "cb689b5f2615be31",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Code Style & Conventions"
+        ],
+        "para_hash": "28ebb56d72546910",
+        "lines": [
+          119,
+          119
+        ],
+        "quote": "- Use top-level `import` statements; do not use `require()`."
+      },
+      "text": "Use top-level import statements, not require().",
+      "scope": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "forbidden-pattern",
+        "pattern": "require($$$ARGS)",
+        "examples": {
+          "bad": "const kit = require('drizzle-kit/api');",
+          "good": "import kit from 'drizzle-kit/api';"
+        }
+      },
+      "fix": "Use a top-level import. For a CommonJS-only module, keep createRequire and record a deliberate exception."
+    },
+    {
+      "id": "cea917745e4be476",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Code Style & Conventions"
+        ],
+        "para_hash": "5ce7f657caf3e933",
+        "lines": [
+          120,
+          120
+        ],
+        "quote": "- Never re-export as a shortcut; import from the original source."
+      },
+      "text": "Never re-export as a shortcut; import from the original source.",
+      "scope": [
+        "apps/web/src/**/*.ts",
+        "apps/web/src/**/*.tsx",
+        "!**/index.ts",
+        "!**/index.tsx"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "forbidden-pattern",
+        "pattern": "export * from '$SOURCE'",
+        "examples": {
+          "bad": "export * from './octokit-cache';",
+          "good": "export const local = 1;"
+        }
+      },
+      "fix": "Import names from their original module where they are used, and delete this re-export."
+    },
+    {
+      "id": "ecd7b16e4655fa1b",
+      "anchor": {
+        "path": "AGENTS.md",
+        "heading_path": [
+          "Project Overview",
+          "Code Style & Conventions"
+        ],
+        "para_hash": "5ce7f657caf3e933",
+        "lines": [
+          120,
+          120
+        ],
+        "quote": "- Never re-export as a shortcut; import from the original source."
+      },
+      "text": "Never re-export as a shortcut; import from the original source.",
+      "scope": [
+        "apps/web/src/**/*.ts",
+        "apps/web/src/**/*.tsx",
+        "!**/index.ts",
+        "!**/index.tsx"
+      ],
+      "check": {
+        "kind": "library",
+        "rule": "forbidden-pattern",
+        "pattern": "export { $$$NAMES } from '$SOURCE'",
+        "examples": {
+          "bad": "export { buildIssueContextText } from '@core/primitives/issues/api';",
+          "good": "export const local = 1;"
+        }
+      },
+      "fix": "Import the name from its original module where it is used, and delete this re-export."
+    }
+  ]
+}

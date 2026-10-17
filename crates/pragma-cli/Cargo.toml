@@ -1,0 +1,28 @@
+[package]
+name = "pragma-cli"
+description = "The pragma command-line tool."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "pragma"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+pragma-engine = { path = "../pragma-engine" }
+serde.workspace = true
+serde_json.workspace = true
+
+# Signal handlers for `pragma extract`, so a stopped run stops its model calls. Already in the
+# lockfile through other crates; std has no way to catch SIGTERM.
+[target.'cfg(unix)'.dependencies]
+libc.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tempfile.workspace = true

@@ -1,0 +1,19 @@
+# Build output
+/target/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local agent and tool state
+.claude/
+.scratch/
+.notes/
+.cursor
+.codex/config.toml
+.env
+*.log
